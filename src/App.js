@@ -84,8 +84,10 @@ class App {
 		const userInput = await this.getUserInput('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n');
 		if (userInput === '1') {
 			this.play('replay');
-		} else {
+		} else if (userInput === '2') {
 			return;
+		} else {
+			throw new Error('1과 2 중 하나만 입력해주세요.');
 		}
 	}
 }
