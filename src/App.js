@@ -1,8 +1,10 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
-	play() {
-		console.log('숫자 야구 게임을 시작합니다.');
+	play(mode = 'first') {
+		if (mode === 'first') {
+			console.log('숫자 야구 게임을 시작합니다.');
+		}
 		const computerNum = this.chooseTargetNumber();
 		console.log('computerNum: ' + computerNum);
 		this.guessTarget(computerNum);
@@ -66,8 +68,18 @@ class App {
 
 			if (result['스트라이크'] === 3) {
 				console.log('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+				this.restart();
 				break;
 			}
+		}
+	}
+
+	async restart() {
+		const userInput = await this.getUserInput('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n');
+		if (userInput === '1') {
+			this.play('replay');
+		} else {
+			return;
 		}
 	}
 }
