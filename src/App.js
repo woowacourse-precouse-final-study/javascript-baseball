@@ -8,6 +8,9 @@ class App {
 
 		console.log('computerNum: ', computerNum);
 		console.log('userInput: ', userInput);
+
+		const result = this.generateResult(computerNum, userInput);
+		console.log('result: ',result);
 	}
 
 	chooseTargetNumber() {
@@ -29,6 +32,35 @@ class App {
 				resolve(ans);
 			}),
 		);
+	}
+
+	generateResult(num1, num2) {
+		const result = {};
+
+		[...String(num1)].map((digit, idx) => {
+			if (String(num2)[idx] === digit) {
+				result['스트라이크'] ? result['스트라이크']++ : (result['스트라이크'] = 1);
+			} else if (String(num2).includes(digit)) {
+				result['볼'] ? result['볼']++ : (result['볼'] = 1);
+			}
+		});
+
+		let result_message = '';
+
+		if (!Object.keys(result).length) {
+			result_message = '낫싱';
+		} else {
+			if (result['볼']) {
+				result_message += `${result['볼']}볼`;
+			}
+			if (result['스트라이크']) {
+				result_message += ` ${result['스트라이크']}스트라이크`;
+			}
+		}
+
+		console.log(result_message);
+
+		return result;
 	}
 }
 
