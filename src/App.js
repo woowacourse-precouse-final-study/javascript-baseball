@@ -10,7 +10,14 @@ class App {
 	}
 
 	chooseTargetNumber() {
-		const targetNum = MissionUtils.Random.pickNumberInRange(100, 999);
+		const targetNum = [];
+		while (targetNum.length < 3) {
+			const number = MissionUtils.Random.pickNumberInRange(1, 9);
+			if (!targetNum.includes(number)) {
+				targetNum.push(number);
+			}
+		}
+		
 		return targetNum;
 	}
 
