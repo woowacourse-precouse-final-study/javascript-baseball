@@ -6,7 +6,6 @@ class App {
 			console.log('숫자 야구 게임을 시작합니다.');
 		}
 		const computerNum = this.chooseTargetNumber();
-		console.log('computerNum: ' + computerNum);
 		this.guessTarget(computerNum);
 	}
 
@@ -25,7 +24,14 @@ class App {
 
 		return new Promise(resolve =>
 			rl.question(query, ans => {
+				if (isNaN(Number(ans))) {
+					throw new Error('숫자만 입력해주세요');
+				}
+				if (ans.length !== 3) {
+					throw new Error('3자리 숫자를 입력해주세요');
+				}
 				rl.close();
+
 				resolve(ans);
 			}),
 		);
