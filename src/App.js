@@ -1,16 +1,11 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
-	async play() {
+	play() {
 		console.log('숫자 야구 게임을 시작합니다.');
 		const computerNum = this.chooseTargetNumber();
-		const userInput = await this.getUserInput('숫자를 입력해주세요 : ');
-
-		console.log('computerNum: ', computerNum);
-		console.log('userInput: ', userInput);
-
-		const result = this.generateResult(computerNum, userInput);
-		console.log('result: ',result);
+		console.log('computerNum: ' + computerNum);
+		this.guessTarget(computerNum);
 	}
 
 	chooseTargetNumber() {
@@ -61,6 +56,19 @@ class App {
 		console.log(result_message);
 
 		return result;
+	}
+
+	async guessTarget(target) {
+		while (true) {
+			const userNum = await this.getUserInput('숫자를 입력해주세요 : ');
+
+			const result = this.generateResult(target, userNum);
+
+			if (result['스트라이크'] === 3) {
+				console.log('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+				break;
+			}
+		}
 	}
 }
 
