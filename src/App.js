@@ -24,14 +24,7 @@ class App {
 
 		return new Promise(resolve =>
 			rl.question(query, ans => {
-				if (isNaN(Number(ans))) {
-					throw new Error('숫자만 입력해주세요');
-				}
-				if (ans.length !== 3) {
-					throw new Error('3자리 숫자를 입력해주세요');
-				}
 				rl.close();
-
 				resolve(ans);
 			}),
 		);
@@ -69,6 +62,7 @@ class App {
 	async guessTarget(target) {
 		while (true) {
 			const userNum = await this.getUserInput('숫자를 입력해주세요 : ');
+			this.checkValidity(userNum);
 
 			const result = this.generateResult(target, userNum);
 
@@ -88,6 +82,15 @@ class App {
 			return;
 		} else {
 			throw new Error('1과 2 중 하나만 입력해주세요.');
+		}
+	}
+
+	checkValidity(num) {
+		if (isNaN(Number(num))) {
+			throw new Error('숫자만 입력해주세요');
+		}
+		if (num.length !== 3) {
+			throw new Error('3자리 숫자를 입력해주세요');
 		}
 	}
 }
