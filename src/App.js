@@ -47,10 +47,10 @@ class App {
 			result_message = '낫싱';
 		} else {
 			if (result['볼']) {
-				result_message += `${result['볼']}볼`;
+				result_message += `${result['볼']}볼 `;
 			}
 			if (result['스트라이크']) {
-				result_message += ` ${result['스트라이크']}스트라이크`;
+				result_message += `${result['스트라이크']}스트라이크`;
 			}
 		}
 
