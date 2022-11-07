@@ -99,6 +99,21 @@ class App {
 		if (num.length !== 3) {
 			throw new Error('3자리 숫자를 입력해주세요');
 		}
+		if (this.checkDuplicates(num)) {
+			throw new Error('중복된 숫자가 있습니다.');
+		}
+	}
+	
+	checkDuplicates(num) {
+		let flag = false;
+
+		[...String(num)].map((char,idx) => {
+			if (String(num).slice(idx+1).includes(char)) {
+				flag = true
+			}
+		})
+
+		return flag;
 	}
 }
 
