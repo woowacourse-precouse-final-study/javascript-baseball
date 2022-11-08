@@ -3,7 +3,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 class App {
 	play(mode = 'first') {
 		if (mode === 'first') {
-			console.log('숫자 야구 게임을 시작합니다.');
+			MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 		}
 		const computerNum = this.chooseTargetNumber();
 		this.guessTarget(computerNum);
@@ -17,24 +17,14 @@ class App {
 				targetNum.push(number);
 			}
 		}
-		
-		return targetNum;
+
+		return targetNum.join('');
 	}
 
 	getUserInput(query) {
-		const readline = require('readline');
-		const rl = readline.createInterface({
-			input: process.stdin,
-			output: process.stdout,
-			terminal: false,
+		return new Promise((resolve, reject) => {
+			MissionUtils.Console.readLine(query, resolve);
 		});
-
-		return new Promise(resolve =>
-			rl.question(query, ans => {
-				rl.close();
-				resolve(ans);
-			}),
-		);
 	}
 
 	generateResult(num1, num2) {
@@ -61,7 +51,7 @@ class App {
 			}
 		}
 
-		console.log(result_message);
+		MissionUtils.Console.print(result_message);
 
 		return result;
 	}
@@ -74,7 +64,7 @@ class App {
 			const result = this.generateResult(target, userNum);
 
 			if (result['스트라이크'] === 3) {
-				console.log('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+				MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
 				this.restart();
 				break;
 			}
@@ -86,7 +76,7 @@ class App {
 		if (userInput === '1') {
 			this.play('replay');
 		} else if (userInput === '2') {
-			return;
+			MissionUtils.Console.close();
 		} else {
 			throw new Error('1과 2 중 하나만 입력해주세요.');
 		}
@@ -103,15 +93,19 @@ class App {
 			throw new Error('중복된 숫자가 있습니다.');
 		}
 	}
-	
+
 	checkDuplicates(num) {
 		let flag = false;
 
-		[...String(num)].map((char,idx) => {
-			if (String(num).slice(idx+1).includes(char)) {
-				flag = true
+		[...String(num)].map((char, idx) => {
+			if (
+				String(num)
+					.slice(idx + 1)
+					.includes(char)
+			) {
+				flag = true;
 			}
-		})
+		});
 
 		return flag;
 	}
