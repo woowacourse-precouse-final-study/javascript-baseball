@@ -1,5 +1,6 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 const { GAME_DIRECTION_MESSAGE, RESULT_MESSAGE, ERROR_MESSAGE } = require('./constants');
+const { checkValidity } = require('./utils');
 
 const { OPENING, INPUT, CORRECT_ANSWER, END } = GAME_DIRECTION_MESSAGE;
 const { NOTHING, STRIKE, BALL } = RESULT_MESSAGE;
@@ -57,7 +58,7 @@ class App {
 
 	guessTarget(target) {
 		Console.readLine(INPUT, userInput => {
-			this.checkValidity(userInput);
+			checkValidity(userInput);
 
 			const result = this.generateResult(target, userInput);
 
@@ -80,34 +81,6 @@ class App {
 				throw new Error(INPUT_CHECK);
 			}
 		});
-	}
-
-	checkValidity(num) {
-		if (isNaN(Number(num))) {
-			throw new Error(TYPE_CHECK);
-		}
-		if (num.length !== 3) {
-			throw new Error(LENGTH_CHECK);
-		}
-		if (this.checkDuplicates(num)) {
-			throw new Error(DUPLICATE_CHECK);
-		}
-	}
-
-	checkDuplicates(num) {
-		let flag = false;
-
-		[...String(num)].map((char, idx) => {
-			if (
-				String(num)
-					.slice(idx + 1)
-					.includes(char)
-			) {
-				flag = true;
-			}
-		});
-
-		return flag;
 	}
 }
 
