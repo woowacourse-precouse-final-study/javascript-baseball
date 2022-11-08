@@ -1,9 +1,14 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+const { GAME_DIRECTION_MESSAGE, RESULT_MESSAGE, ERROR_MESSAGE } = require('./constants');
+
+const { OPENING, INPUT, CORRECT_ANSWER, END } = GAME_DIRECTION_MESSAGE;
+const { NOTHING, STRIKE, BALL } = RESULT_MESSAGE;
+const { TYPE_CHECK, LENGTH_CHECK, DUPLICATE_CHECK, INPUT_CHECK } = ERROR_MESSAGE;
 
 class App {
 	play(mode = 'first') {
 		if (mode === 'first') {
-			Console.print('숫자 야구 게임을 시작합니다.');
+			Console.print(OPENING);
 		}
 		const computerNum = this.chooseTargetNumber();
 		this.guessTarget(computerNum);
@@ -26,22 +31,22 @@ class App {
 
 		[...String(num1)].map((digit, idx) => {
 			if (String(num2)[idx] === digit) {
-				result['스트라이크'] ? result['스트라이크']++ : (result['스트라이크'] = 1);
+				result[STRIKE] ? result[STRIKE]++ : (result[STRIKE] = 1);
 			} else if (String(num2).includes(digit)) {
-				result['볼'] ? result['볼']++ : (result['볼'] = 1);
+				result[BALL] ? result[BALL]++ : (result[BALL] = 1);
 			}
 		});
 
 		let result_message = '';
 
 		if (!Object.keys(result).length) {
-			result_message = '낫싱';
+			result_message = NOTHING;
 		} else {
-			if (result['볼']) {
-				result_message += `${result['볼']}볼 `;
+			if (result[BALL]) {
+				result_message += `${result[BALL]}${BALL} `;
 			}
-			if (result['스트라이크']) {
-				result_message += `${result['스트라이크']}스트라이크`;
+			if (result[STRIKE]) {
+				result_message += result[STRIKE] + STRIKE;
 			}
 		}
 
@@ -51,13 +56,13 @@ class App {
 	}
 
 	guessTarget(target) {
-		Console.readLine('숫자를 입력해주세요 : ', userInput => {
+		Console.readLine(INPUT, userInput => {
 			this.checkValidity(userInput);
 
 			const result = this.generateResult(target, userInput);
 
-			if (result['스트라이크'] === 3) {
-				Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+			if (result[STRIKE] === 3) {
+				Console.print(CORRECT_ANSWER);
 				this.restart();
 			}
 
@@ -66,26 +71,26 @@ class App {
 	}
 
 	restart() {
-		Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', userInput => {
+		Console.readLine(END, userInput => {
 			if (userInput === '1') {
 				this.play('replay');
 			} else if (userInput === '2') {
 				Console.close();
 			} else {
-				throw new Error('1과 2 중 하나만 입력해주세요.');
+				throw new Error(INPUT_CHECK);
 			}
 		});
 	}
 
 	checkValidity(num) {
 		if (isNaN(Number(num))) {
-			throw new Error('숫자만 입력해주세요');
+			throw new Error(TYPE_CHECK);
 		}
 		if (num.length !== 3) {
-			throw new Error('3자리 숫자를 입력해주세요');
+			throw new Error(LENGTH_CHECK);
 		}
 		if (this.checkDuplicates(num)) {
-			throw new Error('중복된 숫자가 있습니다.');
+			throw new Error(DUPLICATE_CHECK);
 		}
 	}
 
