@@ -1,9 +1,9 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Console, Random } = require('@woowacourse/mission-utils');
 
 class App {
 	play(mode = 'first') {
 		if (mode === 'first') {
-			MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+			Console.print('숫자 야구 게임을 시작합니다.');
 		}
 		const computerNum = this.chooseTargetNumber();
 		this.guessTarget(computerNum);
@@ -12,7 +12,7 @@ class App {
 	chooseTargetNumber() {
 		const targetNum = [];
 		while (targetNum.length < 3) {
-			const number = MissionUtils.Random.pickNumberInRange(1, 9);
+			const number = Random.pickNumberInRange(1, 9);
 			if (!targetNum.includes(number)) {
 				targetNum.push(number);
 			}
@@ -23,7 +23,7 @@ class App {
 
 	getUserInput(query) {
 		return new Promise((resolve, reject) => {
-			MissionUtils.Console.readLine(query, resolve);
+			Console.readLine(query, resolve);
 		});
 	}
 
@@ -51,7 +51,7 @@ class App {
 			}
 		}
 
-		MissionUtils.Console.print(result_message);
+		Console.print(result_message);
 
 		return result;
 	}
@@ -64,7 +64,7 @@ class App {
 			const result = this.generateResult(target, userNum);
 
 			if (result['스트라이크'] === 3) {
-				MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+				Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
 				this.restart();
 				break;
 			}
@@ -76,7 +76,7 @@ class App {
 		if (userInput === '1') {
 			this.play('replay');
 		} else if (userInput === '2') {
-			MissionUtils.Console.close();
+			Console.close();
 		} else {
 			throw new Error('1과 2 중 하나만 입력해주세요.');
 		}
