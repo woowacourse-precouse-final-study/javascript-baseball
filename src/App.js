@@ -21,12 +21,6 @@ class App {
 		return targetNum.join('');
 	}
 
-	getUserInput(query) {
-		return new Promise((resolve, reject) => {
-			Console.readLine(query, resolve);
-		});
-	}
-
 	generateResult(num1, num2) {
 		const result = {};
 
@@ -56,30 +50,31 @@ class App {
 		return result;
 	}
 
-	async guessTarget(target) {
-		while (true) {
-			const userNum = await this.getUserInput('숫자를 입력해주세요 : ');
-			this.checkValidity(userNum);
+	guessTarget(target) {
+		Console.readLine('숫자를 입력해주세요 : ', userInput => {
+			this.checkValidity(userInput);
 
-			const result = this.generateResult(target, userNum);
+			const result = this.generateResult(target, userInput);
 
 			if (result['스트라이크'] === 3) {
 				Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
 				this.restart();
-				break;
 			}
-		}
+
+			this.guessTarget(target);
+		});
 	}
 
-	async restart() {
-		const userInput = await this.getUserInput('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n');
-		if (userInput === '1') {
-			this.play('replay');
-		} else if (userInput === '2') {
-			Console.close();
-		} else {
-			throw new Error('1과 2 중 하나만 입력해주세요.');
-		}
+	restart() {
+		Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', userInput => {
+			if (userInput === '1') {
+				this.play('replay');
+			} else if (userInput === '2') {
+				Console.close();
+			} else {
+				throw new Error('1과 2 중 하나만 입력해주세요.');
+			}
+		});
 	}
 
 	checkValidity(num) {
