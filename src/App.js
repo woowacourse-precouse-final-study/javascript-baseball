@@ -4,7 +4,7 @@ const { checkValidity } = require('./utils');
 
 const { OPENING, INPUT, CORRECT_ANSWER, END } = GAME_DIRECTION_MESSAGE;
 const { NOTHING, STRIKE, BALL } = RESULT_MESSAGE;
-const { TYPE_CHECK, LENGTH_CHECK, DUPLICATE_CHECK, INPUT_CHECK } = ERROR_MESSAGE;
+const { INPUT_CHECK } = ERROR_MESSAGE;
 
 class App {
 	play(mode = 'first') {

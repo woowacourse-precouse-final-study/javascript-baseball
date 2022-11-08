@@ -1,3 +1,6 @@
+const { ERROR_MESSAGE } = require('./constants');
+const { TYPE_CHECK, LENGTH_CHECK, DUPLICATE_CHECK } = ERROR_MESSAGE;
+
 function checkDuplicates(num) {
 	let isDuplicate = false;
 
