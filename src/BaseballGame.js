@@ -11,7 +11,6 @@ class BaseballGame {
 
   constructor() {
     this.#computerNumber = ComputerNumberMaker.makeComputerNumber();
-    console.log(this.#computerNumber)
   }
 
   play() {
