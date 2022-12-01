@@ -1,6 +1,9 @@
 const BASEBALL_GAME_OPTION = {
   restart: '1',
   end: '2',
+  min_number: '1',
+  max_number: '9',
+  number_len: '3',
 }
 const BASEBALL_GAME_SENTENCE = {
   start: "숫자 야구 게임을 시작합니다.",
