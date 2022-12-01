@@ -3,6 +3,8 @@ const { Console } = require("@woowacourse/mission-utils")
 const { readUserNumber, readRetryOrDone } = require("./InputView");
 const OutputView = require("./OutputView");
 
+const RETRY_NUMBER_ONE = '1';
+
 class BaseballGame {
   #computerNumber;
   #userNumber;
@@ -49,7 +51,7 @@ class BaseballGame {
   }
 
   retry(input) {
-    return (input === '1') ? this.init() : Console.close();
+    return (input === RETRY_NUMBER_ONE) ? this.init() : Console.close();
   }
   
 }
