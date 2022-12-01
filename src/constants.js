@@ -1,8 +1,11 @@
-const GAME_DIRECTION_MESSAGE = {
+const GAME_DIRECTION_INPUT_MESSAGE = {
+	GUESS_NUMBER: '숫자를 입력해주세요 : ',
+	RESTART_OR_END: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+};
+
+const GAME_DIRECTION_OUTPUT_MESSAGE = {
 	OPENING: '숫자 야구 게임을 시작합니다.',
-	INPUT: '숫자를 입력해주세요 : ',
 	CORRECT_ANSWER: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
-	END: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
 };
 
 const RESULT_MESSAGE = {
@@ -19,7 +22,8 @@ const ERROR_MESSAGE = {
 };
 
 module.exports = {
-	GAME_DIRECTION_MESSAGE,
+	GAME_DIRECTION_INPUT_MESSAGE,
+	GAME_DIRECTION_OUTPUT_MESSAGE,
 	RESULT_MESSAGE,
 	ERROR_MESSAGE,
 };
