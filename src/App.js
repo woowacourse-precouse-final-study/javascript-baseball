@@ -1,10 +1,14 @@
-const InputView = require("./InputView");
+const BaseballGame = require("./BaseBallGame");
 const OutputView = require("./OutputView");
 
 class App {
+  constructor() {
+    this.baseballGame = new BaseballGame();
+  }
+
   play() {
     OutputView.startGame();
-    InputView.readUserNumber();
+    this.baseballGame.play();
   }
 }
 
