@@ -36,6 +36,8 @@ class BaseballGame {
 	}
 
 	generateResult(guessNum) {
+		this.clearResult();
+		
 		[...String(this.#targetNumber)].map((digit, idx) => {
 			const isStrike = String(guessNum)[idx] === digit;
 			const isBall = !isStrike && String(guessNum).includes(digit);

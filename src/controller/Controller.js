@@ -27,17 +27,16 @@ class Controller {
 			Validation.checkValidity(guessNum);
 			const result = this.model.generateResult(guessNum);
 			this.view.output.printResult(result);
-			this.selectOption();
+			this.chekAnswer();
 		});
 	}
 
-	selectOption() {
+	chekAnswer() {
 		const isAnswer = this.model.checkIsAnswer;
 		if (isAnswer) {
 			this.view.output.printCorrectAnswer();
 			this.restartOrEnd();
 		}
-		this.model.clearResult();
 		this.guess();
 	}
 
