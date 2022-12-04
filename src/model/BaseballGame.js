@@ -3,7 +3,10 @@ const { Random } = require('@woowacourse/mission-utils');
 
 class BaseballGame {
 	#targetNumber;
-	#result = {};
+	#result = {
+		[RESULT_MESSAGE.BALL]: 0,
+		[RESULT_MESSAGE.STRIKE]: 0,
+	};
 	#isAnswer = false;
 
 	constructor() {
@@ -33,14 +36,12 @@ class BaseballGame {
 	}
 
 	generateResult(guessNum) {
-		const { STRIKE, BALL } = RESULT_MESSAGE;
-
 		[...String(this.#targetNumber)].map((digit, idx) => {
-			if (String(guessNum)[idx] === digit) {
-				this.#result[STRIKE] ? this.#result[STRIKE]++ : (this.#result[STRIKE] = 1);
-			} else if (String(guessNum).includes(digit)) {
-				this.#result[BALL] ? this.#result[BALL]++ : (this.#result[BALL] = 1);
-			}
+			const isStrike = String(guessNum)[idx] === digit;
+			const isBall = !isStrike && String(guessNum).includes(digit);
+
+			if (isStrike) this.#result[RESULT_MESSAGE.STRIKE] += 1;
+			if (isBall) this.#result[RESULT_MESSAGE.BALL] += 1;
 		});
 
 		if (this.#result[STRIKE] === 3) {
