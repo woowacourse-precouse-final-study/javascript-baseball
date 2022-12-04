@@ -21,7 +21,7 @@ class Controller {
 	play() {
 		this.model.generateTargetNumber();
 		console.log(this.model.targetNumber);
-    this.guess();
+		this.guess();
 	}
 
 	guess() {
@@ -60,4 +60,4 @@ class Controller {
 	}
 }
 
-module.exports = { Controller };
+module.exports = Controller;
