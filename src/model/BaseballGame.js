@@ -48,8 +48,10 @@ class BaseballGame {
 			this.#isAnswer = true;
 		}
 	}
+
 	clearResult() {
-		this.#result = {};
+		this.#result[RESULT_MESSAGE.STRIKE] = 0;
+		this.#result[RESULT_MESSAGE.BALL] = 0;
 	}
 }
 
