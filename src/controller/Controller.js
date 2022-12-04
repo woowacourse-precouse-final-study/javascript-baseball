@@ -11,12 +11,12 @@ class Controller {
 			input: InputView,
 		};
 	}
-	
+
 	start() {
 		this.view.output.printOpening();
 		this.play();
 	}
-	
+
 	play() {
 		this.model = new BaseballGame();
 		this.guess();
@@ -25,15 +25,14 @@ class Controller {
 	guess() {
 		this.view.input.readGuess(guessNum => {
 			Validation.checkValidity(guessNum);
-			this.model.generateResult(guessNum);
-			this.result();
+			const result = this.model.generateResult(guessNum);
+			this.view.output.printResult(result);
+			this.selectOption();
 		});
 	}
 
-	result() {
-		const result = this.model.result;
-		const isAnswer = this.model.isAnswer;
-		this.view.output.printResult(result);
+	selectOption() {
+		const isAnswer = this.model.checkIsAnswer;
 		if (isAnswer) {
 			this.view.output.printCorrectAnswer();
 			this.restartOrEnd();

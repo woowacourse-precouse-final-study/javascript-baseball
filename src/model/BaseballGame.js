@@ -43,6 +43,8 @@ class BaseballGame {
 			if (isStrike) this.#result[RESULT_MESSAGE.STRIKE] += 1;
 			if (isBall) this.#result[RESULT_MESSAGE.BALL] += 1;
 		});
+
+		return this.#result;
 	}
 
 	checkIsAnswer() {
