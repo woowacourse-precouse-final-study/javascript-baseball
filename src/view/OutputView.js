@@ -21,8 +21,8 @@ const OuputView = {
 
 		return resultString;
 	},
-	
-	printCorrectAnswer() {
+
+	printEnding() {
 		Console.print(GAME_DIRECTION_OUTPUT_MESSAGE.CORRECT_ANSWER);
 	},
 };

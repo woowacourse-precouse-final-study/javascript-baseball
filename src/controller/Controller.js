@@ -34,7 +34,7 @@ class Controller {
 	chekAnswer() {
 		const isAnswer = this.model.checkIsAnswer();
 		if (isAnswer) {
-			this.view.output.printCorrectAnswer();
+			this.view.output.printEnding();
 			this.restartOrEnd();
 		}
 		this.guess();
