@@ -1,12 +1,12 @@
 const { Console } = require('@woowacourse/mission-utils');
 const {
-	GAME_DIRECTION_OUTPUT_MESSAGE,
+	GAME_DIRECTION_OUTPUT_MESSAGE: { OPENING, CORRECT_ANSWER },
 	RESULT_MESSAGE: { NOTHING, STRIKE, BALL },
 } = require('../constants');
 
 const OuputView = {
 	printOpening() {
-		Console.print(GAME_DIRECTION_OUTPUT_MESSAGE.OPENING);
+		Console.print(OPENING);
 	},
 
 	printResult(result) {
@@ -23,7 +23,7 @@ const OuputView = {
 	},
 
 	printEnding() {
-		Console.print(GAME_DIRECTION_OUTPUT_MESSAGE.CORRECT_ANSWER);
+		Console.print(CORRECT_ANSWER);
 	},
 };
 

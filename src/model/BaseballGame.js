@@ -1,5 +1,5 @@
 const {
-	RESULT_MESSAGE,
+	RESULT_MESSAGE: { STRIKE, BALL },
 	TARGET_NUMBER_CONSTRAINTS: { NUMBER_LENGTH, RANGE_MIN, RANGE_MAX },
 } = require('../constants');
 const { Random } = require('@woowacourse/mission-utils');
@@ -7,8 +7,8 @@ const { Random } = require('@woowacourse/mission-utils');
 class BaseballGame {
 	#targetNumber;
 	#result = {
-		[RESULT_MESSAGE.BALL]: 0,
-		[RESULT_MESSAGE.STRIKE]: 0,
+		[BALL]: 0,
+		[STRIKE]: 0,
 	};
 
 	constructor() {
@@ -32,20 +32,20 @@ class BaseballGame {
 			const isStrike = String(guessNum)[idx] === digit;
 			const isBall = !isStrike && String(guessNum).includes(digit);
 
-			if (isStrike) this.#result[RESULT_MESSAGE.STRIKE] += 1;
-			if (isBall) this.#result[RESULT_MESSAGE.BALL] += 1;
+			if (isStrike) this.#result[STRIKE] += 1;
+			if (isBall) this.#result[BALL] += 1;
 		});
 
 		return this.#result;
 	}
 
 	checkIsAnswer() {
-		return this.#result[RESULT_MESSAGE.STRIKE] === NUMBER_LENGTH;
+		return this.#result[STRIKE] === NUMBER_LENGTH;
 	}
 
 	clearResult() {
-		this.#result[RESULT_MESSAGE.STRIKE] = 0;
-		this.#result[RESULT_MESSAGE.BALL] = 0;
+		this.#result[STRIKE] = 0;
+		this.#result[BALL] = 0;
 	}
 }
 
