@@ -3,23 +3,9 @@ const {
 	TARGET_NUMBER_CONSTRAINTS: { NUMBER_LENGTH },
 	COMMAND_OPTIONS: { END, RETRY },
 } = require('./constants');
+const { checkDuplicates } = require('./utils');
 
 const Validation = {
-	checkDuplicates(num) {
-		let isDuplicate = false;
-
-		[...String(num)].map((char, idx) => {
-			if (
-				String(num)
-					.slice(idx + 1)
-					.includes(char)
-			) {
-				isDuplicate = true;
-			}
-		});
-
-		return isDuplicate;
-	},
 	checkValidGuessNumber(num) {
 		if (isNaN(Number(num))) {
 			throw new Error(ERROR_MESSAGE.TYPE_CHECK);
@@ -27,7 +13,7 @@ const Validation = {
 		if (num.length !== NUMBER_LENGTH) {
 			throw new Error(ERROR_MESSAGE.LENGTH_CHECK);
 		}
-		if (Validation.checkDuplicates(num)) {
+		if (checkDuplicates(num)) {
 			throw new Error(ERROR_MESSAGE.DUPLICATE_CHECK);
 		}
 	},
