@@ -6,21 +6,19 @@ const { Console } = require('@woowacourse/mission-utils');
 
 class Controller {
 	constructor() {
-		this.model = new BaseballGame();
 		this.view = {
 			output: OutputView,
 			input: InputView,
 		};
 	}
-
+	
 	start() {
 		this.view.output.printOpening();
 		this.play();
 	}
-
+	
 	play() {
-		this.model.generateTargetNumber();
-		console.log(this.model.targetNumber);
+		this.model = new BaseballGame();
 		this.guess();
 	}
 

@@ -7,7 +7,7 @@ class BaseballGame {
 	#isAnswer = false;
 
 	constructor() {
-		this.generateTargetNumber();
+		this.#targetNumber = this.generateTargetNumber();
 	}
 
 	get targetNumber() {
@@ -29,7 +29,7 @@ class BaseballGame {
 			targetNum.add(number);
 		}
 
-		this.#targetNumber = [...targetNum].join('');
+		return [...targetNum].join('');
 	}
 
 	generateResult(guessNum) {
