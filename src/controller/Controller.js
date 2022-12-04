@@ -32,7 +32,7 @@ class Controller {
 	}
 
 	chekAnswer() {
-		const isAnswer = this.model.checkIsAnswer;
+		const isAnswer = this.model.checkIsAnswer();
 		if (isAnswer) {
 			this.view.output.printCorrectAnswer();
 			this.restartOrEnd();
