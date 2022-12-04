@@ -20,14 +20,14 @@ const Validation = {
 
 		return isDuplicate;
 	},
-	checkValidity(num) {
+	checkValidGuessNumber(num) {
 		if (isNaN(Number(num))) {
 			throw new Error(ERROR_MESSAGE.TYPE_CHECK);
 		}
 		if (num.length !== NUMBER_LENGTH) {
 			throw new Error(ERROR_MESSAGE.LENGTH_CHECK);
 		}
-		if (this.checkDuplicates(num)) {
+		if (Validation.checkDuplicates(num)) {
 			throw new Error(ERROR_MESSAGE.DUPLICATE_CHECK);
 		}
 	},
@@ -38,4 +38,4 @@ const Validation = {
 	},
 };
 
-module.exports = Validation;
+module.exports = { Validation };

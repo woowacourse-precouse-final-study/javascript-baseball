@@ -1,6 +1,5 @@
 const OutputView = require('../view/OutputView');
 const InputView = require('../view/InputView');
-const Validation = require('../validation');
 const BaseballGame = require('../model/BaseballGame');
 const { Console } = require('@woowacourse/mission-utils');
 const {
@@ -27,7 +26,6 @@ class Controller {
 
 	guess() {
 		this.view.input.readGuess(guessNum => {
-			Validation.checkValidity(guessNum);
 			const result = this.model.generateResult(guessNum);
 			this.view.output.printResult(result);
 			this.checkAnswer();
@@ -45,7 +43,6 @@ class Controller {
 
 	restartOrEnd() {
 		this.view.input.readCommand(commandInput => {
-			Validation.checkValidCommand(commandInput);
 			commandInput === RETRY ? this.play() : this.endGame();
 		});
 	}
