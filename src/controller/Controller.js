@@ -3,6 +3,9 @@ const InputView = require('../view/InputView');
 const Validation = require('../validation');
 const BaseballGame = require('../model/BaseballGame');
 const { Console } = require('@woowacourse/mission-utils');
+const {
+	COMMAND_OPTIONS: { RETRY },
+} = require('../constants');
 
 class Controller {
 	constructor() {
@@ -43,7 +46,7 @@ class Controller {
 	restartOrEnd() {
 		this.view.input.readCommand(commandInput => {
 			Validation.checkValidCommand(commandInput);
-			commandInput === '1' ? this.play() : this.endGame();
+			commandInput === RETRY ? this.play() : this.endGame();
 		});
 	}
 

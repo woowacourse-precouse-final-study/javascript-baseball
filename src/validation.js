@@ -1,4 +1,8 @@
-const { ERROR_MESSAGE } = require('./constants');
+const {
+	ERROR_MESSAGE,
+	TARGET_NUMBER_CONSTRAINTS: { NUMBER_LENGTH },
+	COMMAND_OPTIONS: { END, RETRY },
+} = require('./constants');
 
 const Validation = {
 	checkDuplicates(num) {
@@ -20,7 +24,7 @@ const Validation = {
 		if (isNaN(Number(num))) {
 			throw new Error(ERROR_MESSAGE.TYPE_CHECK);
 		}
-		if (num.length !== 3) {
+		if (num.length !== NUMBER_LENGTH) {
 			throw new Error(ERROR_MESSAGE.LENGTH_CHECK);
 		}
 		if (this.checkDuplicates(num)) {
@@ -28,7 +32,7 @@ const Validation = {
 		}
 	},
 	checkValidCommand(command) {
-		if (command !== '1' && command !== '2') {
+		if (command !== RETRY && command !== END) {
 			throw new Error(ERROR_MESSAGE.INPUT_CHECK);
 		}
 	},

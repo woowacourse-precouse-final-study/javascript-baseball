@@ -1,4 +1,7 @@
-const { RESULT_MESSAGE } = require('../constants');
+const {
+	RESULT_MESSAGE,
+	TARGET_NUMBER_CONSTRAINTS: { NUMBER_LENGTH, RANGE_MIN, RANGE_MAX },
+} = require('../constants');
 const { Random } = require('@woowacourse/mission-utils');
 
 class BaseballGame {
@@ -14,8 +17,8 @@ class BaseballGame {
 
 	generateTargetNumber() {
 		const targetNum = new Set();
-		while (targetNum.size < 3) {
-			const number = Random.pickNumberInRange(1, 9);
+		while (targetNum.size < NUMBER_LENGTH) {
+			const number = Random.pickNumberInRange(RANGE_MIN, RANGE_MAX);
 			targetNum.add(number);
 		}
 
@@ -37,7 +40,7 @@ class BaseballGame {
 	}
 
 	checkIsAnswer() {
-		return this.#result[RESULT_MESSAGE.STRIKE] === 3;
+		return this.#result[RESULT_MESSAGE.STRIKE] === NUMBER_LENGTH;
 	}
 
 	clearResult() {
