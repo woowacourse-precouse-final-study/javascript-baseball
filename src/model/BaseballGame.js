@@ -18,20 +18,18 @@ class BaseballGame {
 		return this.#result;
 	}
 
-  get isAnswer() {
-    return this.#isAnswer;
-  }
+	get isAnswer() {
+		return this.#isAnswer;
+	}
 
 	generateTargetNumber() {
-		const targetNum = [];
-		while (targetNum.length < 3) {
+		const targetNum = new Set();
+		while (targetNum.size < 3) {
 			const number = Random.pickNumberInRange(1, 9);
-			if (!targetNum.includes(number)) {
-				targetNum.push(number);
-			}
+			targetNum.add(number);
 		}
 
-		this.#targetNumber = targetNum.join('');
+		this.#targetNumber = [...targetNum].join('');
 	}
 
 	generateResult(guessNum) {
