@@ -30,11 +30,11 @@ class Controller {
 			Validation.checkValidity(guessNum);
 			const result = this.model.generateResult(guessNum);
 			this.view.output.printResult(result);
-			this.chekAnswer();
+			this.checkAnswer();
 		});
 	}
 
-	chekAnswer() {
+	checkAnswer() {
 		const isAnswer = this.model.checkIsAnswer();
 		if (isAnswer) {
 			this.view.output.printEnding();
