@@ -29,7 +29,7 @@ class BaseballGame {
 			targetNum.add(number);
 		}
 
-		return [...targetNum].join('');
+		return Number([...targetNum].join(''));
 	}
 
 	generateResult(guessNum) {
