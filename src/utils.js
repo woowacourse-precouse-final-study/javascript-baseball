@@ -1,3 +1,7 @@
+const {
+	RESULT_MESSAGE: { BALL, STRIKE },
+} = require('./constants');
+
 const checkDuplicates = num => {
 	[...String(num)].map((char, idx) => {
 		if (
@@ -11,4 +15,12 @@ const checkDuplicates = num => {
 	return false;
 };
 
-module.exports = { checkDuplicates };
+const generateResultString = (balls, strikes) => {
+	let resultString = '';
+	balls ? (resultString += `${balls}${BALL} `) : '';
+	strikes ? (resultString += `${strikes}${STRIKE}`) : '';
+
+	return resultString;
+};
+
+module.exports = { checkDuplicates, generateResultString };

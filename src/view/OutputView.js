@@ -3,6 +3,7 @@ const {
 	GAME_DIRECTION_OUTPUT_MESSAGE: { OPENING, CORRECT_ANSWER },
 	RESULT_MESSAGE: { NOTHING, STRIKE, BALL },
 } = require('../constants');
+const { generateResultString } = require('../utils');
 
 const OuputView = {
 	printOpening() {
@@ -11,15 +12,7 @@ const OuputView = {
 
 	printResult(result) {
 		if (!result[BALL] && !result[STRIKE]) return Console.print(NOTHING);
-		Console.print(this.generateResultString(result[BALL], result[STRIKE]));
-	},
-
-	generateResultString(balls, strikes) {
-		let resultString = '';
-		balls ? (resultString += `${balls}${BALL} `) : '';
-		strikes ? (resultString += `${strikes}${STRIKE}`) : '';
-
-		return resultString;
+		Console.print(generateResultString(result[BALL], result[STRIKE]));
 	},
 
 	printEnding() {
