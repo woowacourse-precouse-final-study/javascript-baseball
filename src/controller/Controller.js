@@ -43,11 +43,7 @@ class Controller {
 	restartOrEnd() {
 		this.view.input.readCommand(commandInput => {
 			Validation.checkValidCommand(commandInput);
-			if (commandInput === '1') {
-				this.play();
-			} else {
-				this.endGame();
-			}
+			commandInput === '1' ? this.play() : this.endGame();
 		});
 	}
 
