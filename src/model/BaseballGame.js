@@ -43,10 +43,10 @@ class BaseballGame {
 			if (isStrike) this.#result[RESULT_MESSAGE.STRIKE] += 1;
 			if (isBall) this.#result[RESULT_MESSAGE.BALL] += 1;
 		});
+	}
 
-		if (this.#result[STRIKE] === 3) {
-			this.#isAnswer = true;
-		}
+	checkIsAnswer() {
+		return this.#result[RESULT_MESSAGE.STRIKE] === 3;
 	}
 
 	clearResult() {
