@@ -5,7 +5,7 @@ const INPUT_QUERY = {
   retry_or_done: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
 };
 
-const THREE_DIGITS = "3";
+const THREE_DIGITS = 3;
 const RETRY_REGEXP = /[^12]/g;
 
 const ERROR = {
