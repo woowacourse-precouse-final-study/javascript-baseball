@@ -1,43 +1,45 @@
 const { Console } = require("@woowacourse/mission-utils");
 
 const INPUT_QUERY = {
-  NUMBER: "숫자를 입력해주세요 : ",
-  RETRY_OR_DONE: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+  number: "숫자를 입력해주세요 : ",
+  retry_or_done: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
 };
 
+const THREE_DIGITS = "3";
+
 const ERROR = {
-  THREE_DIGITS: 3,
-  NOT_THREE_DIGITS: "3자리 숫자를 입력해주세요.",
-  NOT_NUMBER: "숫자를 입력해주세요",
-  DUPLICATE: "중복된 숫자가 있습니다.",
-  NOT_ONE_OR_TWO: "1이나 2만 입력할 수 있습니다."
+  three_digits: 3,
+  not_three_digits: "3자리 숫자를 입력해주세요.",
+  not_number: "숫자를 입력해주세요",
+  duplicate: "중복된 숫자가 있습니다.",
+  not_one_or_two: "1이나 2만 입력할 수 있습니다."
 };
 
 const InputView = {
-  readUserNumber(callback) {
-    Console.readLine(INPUT_QUERY.NUMBER, (input) => {
+  readUserNumber(readUserCallback) {
+    Console.readLine(INPUT_QUERY.number, (input) => {
       ErrorHandling.userNumber(input);
-      callback(input);
+      readUserCallback(input);
     });
   },
 
-  readRetryOrDone(callback) {
-    Console.readLine(INPUT_QUERY.RETRY_OR_DONE, (input) => {
+  readRetryOrDone(retryOrDoneCallback) {
+    Console.readLine(INPUT_QUERY.retry_or_done, (input) => {
       ErrorHandling.retryOrDone(input);
-      callback(input);
+      retryOrDoneCallback(input);
     })
   }
 };
 
 const ErrorHandling = {
   userNumber(input) {
-    if (input.length !== ERROR.THREE_DIGITS) throw new Error(ERROR.NOT_THREE_DIGITS);
-    if (isNaN(input)) throw new Error(ERROR.NOT_NUMBER);
-    if (new Set([...input]).size !== ERROR.THREE_DIGITS) throw new Error(ERROR.DUPLICATE);
+    if (input.length !== THREE_DIGITS) throw new Error(ERROR.three_digits);
+    if (isNaN(input)) throw new Error(ERROR.not_number);
+    if (new Set([...input]).size !== THREE_DIGITS) throw new Error(ERROR.duplicate);
   },
   
   retryOrDone(input) {
-    if (/[^12]/g.test(input) || input.length !== 1) throw new Error(ERROR.NOT_ONE_OR_TWO);
+    if (/[^12]/g.test(input) || input.length !== 1) throw new Error(ERROR.not_one_or_two);
   }
 };
 
