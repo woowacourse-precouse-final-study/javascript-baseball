@@ -3,7 +3,8 @@ const { Console } = require("@woowacourse/mission-utils")
 const { readUserNumber, readRetryOrDone } = require("./InputView");
 const OutputView = require("./OutputView");
 
-const RETRY_NUMBER_ONE = '1';
+const RETRY_OPTION_KEY = '1';
+const SUCCESS_NUMBER = '3';
 
 class BaseballGame {
   #computerNumber;
@@ -44,13 +45,13 @@ class BaseballGame {
 
   findThreeStrike() {
     const strike = this.countStrikeNumbers();
-    if (strike === 3) {
+    if (strike === SUCCESS_NUMBER) {
       OutputView.printAnswerMessage();
       readRetryOrDone(this.retry.bind(this))}
   }
 
   retry(input) {
-    return (input === RETRY_NUMBER_ONE) ? this.init() : Console.close();
+    return (input === RETRY_OPTION_KEY) ? this.init() : Console.close();
   }
   
 }
