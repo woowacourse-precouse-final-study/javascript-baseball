@@ -2,13 +2,9 @@ const BaseballGame = require("./BaseBallGame");
 const OutputView = require("./OutputView");
 
 class App {
-  constructor() {
-    this.baseballGame = new BaseballGame();
-  }
-
   play() {
     OutputView.startGame();
-    this.baseballGame.play();
+    this.baseballGame = new BaseballGame();
   }
 }
 

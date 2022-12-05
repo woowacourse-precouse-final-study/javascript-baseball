@@ -4,7 +4,7 @@ const { readUserNumber, readRetryOrDone } = require("./InputView");
 const OutputView = require("./OutputView");
 
 const RETRY_OPTION_KEY = '1';
-const SUCCESS_NUMBER = '3';
+const SUCCESS_NUMBER = 3;
 
 class BaseballGame {
   #computerNumber;
@@ -12,22 +12,14 @@ class BaseballGame {
 
   constructor() {
     this.#computerNumber = ComputerNumberMaker.makeComputerNumber();
+    readUserNumber(this.compareUserAndComputer.bind(this));
   }
-
-  play() {
-    readUserNumber(this.compareUserAndComputer.bind(this))
-  }
-
-  init() {
-    this.#computerNumber = ComputerNumberMaker.makeComputerNumber();
-    this.play();
-  }
-
+  
   compareUserAndComputer(input) {
     this.#userNumber = input;
     OutputView.printGameResult(this.countBallNumbers(), this.countStrikeNumbers());
     this.findThreeStrike();
-    this.play();
+    readUserNumber(this.compareUserAndComputer.bind(this));
   }
 
   countStrikeNumbers() {
@@ -51,7 +43,7 @@ class BaseballGame {
   }
 
   retry(input) {
-    return (input === RETRY_OPTION_KEY) ? this.init() : Console.close();
+    return (input === RETRY_OPTION_KEY) ? new BaseballGame() : Console.close();
   }
   
 }
